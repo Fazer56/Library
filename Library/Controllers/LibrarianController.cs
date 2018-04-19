@@ -52,8 +52,6 @@ namespace Library.Controllers
 
 		public ActionResult StaffArea()
 		{
-			return View();
-			/*
 			if (Session["libID"] != null)
 			{
 
@@ -62,17 +60,39 @@ namespace Library.Controllers
 			else
 			{
 				return RedirectToAction("StaffLogin");
-			} */
+			}
+
 		}
 
-		/*[HttpPost]
+		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult StaffArea()
+		public ActionResult StaffArea(ItemLibrarianViewModel bookObj)
 		{
+			using (LibraryEntities db = new LibraryEntities())
+			{
+				// Create a new Order object.
+				if (ModelState.IsValid)
+				{
+					Item it = new Item();
+					it.AuthorID = bookObj.Author.AuthorID;
+					it.Name = bookObj.Item.Name;
+					it.Isbn = bookObj.Item.Isbn;
+					it.Subject = bookObj.Item.Subject;
+					it.Type = "Book";
+					it.Year = bookObj.Item.Year;
+					bookObj.Author.Isbn = bookObj.Item.Isbn;
+					db.Authors.Add(bookObj.Author);
+					db.Items.Add(it);
+					db.SaveChanges();
+					if (bookObj.Item.Isbn > 0)
+					{
+						ViewBag.Success = bookObj.Item.Name.ToString();
 
-
-			return View();
-
-		}*/
+					}
+					ModelState.Clear();
+				}
+				return View();
+			}
+		}
 	}
 }

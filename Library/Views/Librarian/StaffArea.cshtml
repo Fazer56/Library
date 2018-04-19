@@ -1,4 +1,4 @@
-﻿@model Library.Models.Librarian
+﻿@model Library.Models.ItemLibrarianViewModel
 @{
 	ViewBag.Title = "StaffArea";
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,7 +17,11 @@
 
 <div class="container">
 	<div class="mt-5"></div>
-	@using (Html.BeginForm("UserArea", "Librarian", FormMethod.Post))
+	@if (ViewBag.Success != null)
+	{
+		<h6><span style="color: lawngreen">Successfully Added: </span> @ViewBag.Success</h6>
+	}
+	@using (Html.BeginForm("StaffArea", "Librarian", FormMethod.Post))
 	{
 
 		<form>
@@ -34,32 +38,28 @@
 						<th scope="col">Book</th>
 						<th scope="col">Author</th>
 						<th scope="col">ISBN</th>
-						<th scope="col">Publisher</th>
 						<th scope="col">Subject</th>
 						<th scope="col">Year</th>
 					</tr>
 				</thead>
 				<tbody>
-
 					<tr class="table-active">
-
-						<th scope="row"><input class="form-control mr-sm-2" type="text" placeholder="Book"></th>
-						<td>
-							@*Html.EditorFor(a => a., new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Author" } })*@
-							<input class="form-control mr-sm-2" type="text" placeholder="Author">
-						</td>
-						<td><input class="form-control mr-sm-2" type="text" placeholder="ISBN"></td>
-						<td><input class="form-control mr-sm-2" type="text" placeholder="Publisher"></td>
-						<td><input class="form-control mr-sm-2" type="text" placeholder="Subject"></td>
-						<td><input class="form-control mr-sm-2" type="text" placeholder="Year"></td>
-
+						<td scope="col">@Html.EditorFor(a => a.Item.Name, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Book" } })</td>
+						<td scope="col">@Html.EditorFor(a => a.Author.AuthName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Author" } })</td>
+						<td scope="col">@Html.EditorFor(a => a.Item.Isbn, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "ISBN" } })</td>
+						<td scope="col">@Html.EditorFor(a => a.Item.Subject, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Subject" } })</td>
+						<td scope="col">@Html.EditorFor(a => a.Item.Year, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Year" } })</td>
 					</tr>
 				</tbody>
 			</table>
 			<button type="submit" class="btn btn-success">Add Book</button>
 		</form>
 	}
+
 </div>
 <script>
-
+	var add = document.getElementById("addBtn");
+	add.addEventListener("click", function () {
+		document.getElementById("bookTable").style.visibility = "visible";
+	})
 </script>

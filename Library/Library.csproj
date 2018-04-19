@@ -220,6 +220,7 @@
     <Compile Include="Models\Author.cs">
       <DependentUpon>LibraryDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItemLibrarianViewModel.cs" />
     <Compile Include="Models\Copy.cs">
       <DependentUpon>LibraryDBModel.tt</DependentUpon>
     </Compile>
