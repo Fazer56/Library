@@ -11,18 +11,16 @@ namespace Library.Models
 {
     using System;
     using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-
-	public partial class Copy
+    
+    public partial class Copy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Copy()
         {
             this.Transactions = new HashSet<Transaction>();
         }
-
-		[Required]
-		public int CopyID { get; set; }
+    
+        public int CopyID { get; set; }
         public string Borrowed { get; set; }
         public Nullable<System.DateTime> Borrow_Date { get; set; }
         public Nullable<System.DateTime> Return_Date { get; set; }

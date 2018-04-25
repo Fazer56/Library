@@ -66,31 +66,51 @@ namespace Library.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult StaffArea(ItemLibrarianViewModel bookObj)
+		public ActionResult StaffArea(ItemLibrarianViewModel bookObj, int numCopies, Customer custObj)
 		{
 			using (LibraryEntities db = new LibraryEntities())
 			{
-				// Create a new Order object.
+				// Add books.
 				if (ModelState.IsValid)
 				{
+
 					Item it = new Item();
-					it.AuthorID = bookObj.Author.AuthorID;
-					it.Name = bookObj.Item.Name;
-					it.Isbn = bookObj.Item.Isbn;
-					it.Subject = bookObj.Item.Subject;
+					it.AuthorID = bookObj.Aut.AuthorID;
+					it.Name = bookObj.It.Name;
+					it.Isbn = bookObj.It.Isbn;
+					it.Subject = bookObj.It.Subject;
 					it.Type = "Book";
-					it.Year = bookObj.Item.Year;
-					bookObj.Author.Isbn = bookObj.Item.Isbn;
-					db.Authors.Add(bookObj.Author);
+					it.Year = bookObj.It.Year;
+					bookObj.Aut.Isbn = bookObj.It.Isbn;
+					db.Authors.Add(bookObj.Aut);
 					db.Items.Add(it);
-					db.SaveChanges();
-					if (bookObj.Item.Isbn > 0)
+					for (int i = 0; i < numCopies; i++)
 					{
-						ViewBag.Success = bookObj.Item.Name.ToString();
+						Copy cp = new Copy();
+						cp.Isbn = bookObj.It.Isbn;
+						cp.Borrowed = "n";
+						db.Copies.Add(cp);
+					}
+					db.SaveChanges();
+					if (bookObj.It.Isbn > 0)
+					{
+						ViewBag.Success = bookObj.It.Name.ToString();
 
 					}
 					ModelState.Clear();
 				}
+				//Add students
+				if (ModelState.IsValid)
+				{
+					Customer cust = new Customer();
+					cust.CustName = custObj.CustName;
+					cust.CustEmail = custObj.CustEmail;
+					cust.Field = custObj.Field;
+					cust.Privalige = custObj.Privalige;
+					cust.CPassword = custObj.CPassword;
+				
+				}
+
 				return View();
 			}
 		}

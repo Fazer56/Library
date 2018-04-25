@@ -1,4 +1,4 @@
-﻿@model Library.Models.Customer
+﻿@model IEnumerable<Library.Models.CopyItemTransacViewModel>
 @{
 	ViewBag.Title = "UserArea";
 	Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,8 +18,7 @@
 
 	}
 
-
-
+	
 </div>
 
 
@@ -62,11 +61,27 @@
 	</div>
 	<div class="col-sm-4">
 		<h2>Library Account</h2>
-		<div class="card border-primary mb-3" style="max-width: 25rem;">
+		<div class="card border-primary mb-3" style="max-width: 30rem;">
 			<div class="card-header">Library Account</div>
 			<div class="card-body">
 				<h4 class="card-title">Borrowed Books</h4>
-				<p class="card-text"></p>
+				@if (ViewBag.Success != null)
+				{
+				<p class="card-text"><span style="color:blue">Borrowed</span>@ViewBag.Success</p>
+				}
+
+				@if (ViewBag.BorrowedMessage != null)
+				{
+					<p class="card-text"><span style="color:red">@ViewBag.BorrowedMessage</span></p>
+				}
+
+				@if (ViewBag.ReturnMessage != null)
+				{
+					
+					<p class="card-text">
+						<span style="color:greenyellow">@ViewBag.ReturnMessage</span></p>
+				}
+
 			</div>
 			<table class="table table-hover">
 				<thead>
@@ -77,17 +92,18 @@
 					</tr>
 				</thead>
 				<tbody>
+					@foreach (var item in Model)
+					{
 					<tr>
-						<th scope="row">Electrical Engineering</th>
-						<td>01/04/2018</td>
-						<td>01/05/2018</td>
-					</tr>
+						<th scope="row">@item.Name</th>
+						<td>@item.Borrow_Date</td>
+						<td>@item.Return_Date</td>
+						
+						<td><input type="button" value="Return" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("BookReturned", "Customer",  new { bookId = item.Isbn })'"/></td>
+						
 
-					<tr>
-						<th scope="row">A Beginners Guide To Programming In C</th>
-						<td>02/04/2018</td>
-						<td>04/05/2018</td>
 					</tr>
+					}
 				</tbody>
 			</table>
 

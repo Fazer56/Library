@@ -221,6 +221,8 @@
     <Compile Include="Models\Author.cs">
       <DependentUpon>LibraryDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CopyItemTransacViewModel.cs" />
+    <Compile Include="Models\GetEnumerator.cs" />
     <Compile Include="Models\ItemLibrarianViewModel.cs" />
     <Compile Include="Models\Copy.cs">
       <DependentUpon>LibraryDBModel.tt</DependentUpon>
@@ -304,7 +306,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -321,6 +325,7 @@
     <Content Include="Views\Librarian\StaffArea.cshtml" />
     <Content Include="Views\Librarian\StaffLogin.cshtml" />
     <Content Include="Views\Book\BookList.cshtml" />
+    <Content Include="Views\Customer\BookBorrowed.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

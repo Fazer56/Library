@@ -11,27 +11,22 @@ namespace Library.Models
 {
     using System;
     using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-
-	public partial class Customer
-	{
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-		public Customer()
-		{
-			this.Transactions = new HashSet<Transaction>();
-		}
-		
-
-		public int CustID { get; set; }
-		public string CustName { get; set; }
-		[Required(ErrorMessage = "Please Enter your Email")]
-		[EmailAddress]
-		public string CustEmail { get; set; }
-		public string Privalige { get; set; }
+    
+    public partial class Customer
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
+        public int CustID { get; set; }
+        public string CustName { get; set; }
+        public string CustEmail { get; set; }
+        public string Privalige { get; set; }
         public Nullable<double> Fine { get; set; }
-		[Required(ErrorMessage = "Please Enter you Password")]
-		public string CPassword { get; set; }
-		public string Field { get; set; }
+        public string CPassword { get; set; }
+        public string Field { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }

@@ -7,8 +7,12 @@ namespace Library.Models
 {
 	public class ItemLibrarianViewModel
 	{
-		public Librarian Librarian { get; set; }
-		public Author Author { get; set; }
-		public Item Item { get; set; }
+		public Librarian Lib { get; set; }
+		public Author Aut { get; set; }
+		public Item It { get; set; }
+		public Copy Cp { get; set; }
+		public Transaction Tc { get; set; }
+		
+
 	}
 }
