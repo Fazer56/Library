@@ -325,7 +325,11 @@
     <Content Include="Views\Librarian\StaffArea.cshtml" />
     <Content Include="Views\Librarian\StaffLogin.cshtml" />
     <Content Include="Views\Book\BookList.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Customer\BookBorrowed.cshtml" />
+=======
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+>>>>>>> 761af1d06222346a483dfd328b87528908f9af1a
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
